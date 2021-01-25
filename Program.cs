@@ -1,140 +1,49 @@
 ﻿using System;
 
-namespace Uppgift_7
+namespace Slask
 {
-// Abstract class
-    abstract class Vehicle
+       class Car
     {
-        public abstract void VehicleColorAndMake();
-    //public abstract void VehicleMake();
-    }
+        public string RegistrationNumber { get; set; }
+        public string Model { get; set; }
+        public Person Owner { get; set; }
 
-    class Car : Vehicle
-    {
-        string color;
-        string make;
-        public override void VehicleColorAndMake() 
+        public override string ToString()
         {
-            Console.WriteLine("The make of the car is " + make + " and the color is " + color);
-        }
-        
-        // Constructor
-        public Car ()
-        { 
-            Random numberGenerator = new Random();
-            int num = numberGenerator.Next(1,4);
-
-            switch (num)
-            {
-                case 1: color = "red"; break;
-                case 2: color = "blue"; break;                
-                case 3: color = "green"; break;
-                case 4: color = "black"; break;
-            }
-            num = numberGenerator.Next(1,4);
-            switch (num)
-            {
-                case 1: make = "Corvette"; break;
-                case 2: make = "Buick"; break;                
-                case 3: make = "Cadillac"; break;
-                case 4: make = "Pontiac"; break;
-            }
-        }
-    }  
-    class StarShip : Vehicle
-    {
-        string color;
-        string make = "w";
-        public override void VehicleColorAndMake() 
-        {
-            Console.WriteLine("The make of the Star ship is " + make + " and the color is " + color);
-        }
-        
-        // Constructor
-        public StarShip ()
-        { 
-            Random numberGenerator = new Random();
-            int num = numberGenerator.Next(1,4);
-
-            switch (num)
-            {
-                case 1: color = "red"; break;
-                case 2: color = "blue"; break;                
-                case 3: color = "green"; break;
-                case 4: color = "black"; break;
-            }
-
-            num = numberGenerator.Next(1,4);
-            switch (num)
-            {
-                case 1: make = "Falcon Millenium"; break;
-                case 2: make = "Tie Fighter"; break;                
-                case 3: make = "Xwing"; break;
-                case 4: make = "Star Destroyer"; break;
-            }
+            return string.Format("En {0} med registreringsnummer {1}, ägs av {2}", Model, RegistrationNumber, Owner.ToString());
         }
     }
 
-   class Bicycle : Vehicle
+    class Person
     {
-        string color;
-        string make;
-        public override void VehicleColorAndMake() 
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int Age { get; set; }
+
+        public override string ToString()
         {
-            Console.WriteLine("The make of the bicycle is  " + make + " and the color is " + color);
-        }
-        
-        // Constructor
-        public Bicycle ()
-        { 
-            Random numberGenerator = new Random();
-            int num = numberGenerator.Next(1,4);
-
-            switch (num)
-            {
-                case 1: color = "red"; break;
-                case 2: color = "blue"; break;                
-                case 3: color = "green"; break;
-                case 4: color = "black"; break;
-            }
-
-            num = numberGenerator.Next(1,4);
-            switch (num)
-            {
-                case 1: make = "Cresent"; break;
-                case 2: make = "DBS"; break;                
-                case 3: make = "Monark"; break;
-                case 4: make = "Skeppshult"; break;
-            }
+            return string.Format("{0} {1}, {2} år gammal.", FirstName, LastName, Age);
         }
     }
-
     class Program
     {
         static void Main(string[] args)
         {
-            Random numberGenerator = new Random();
-            int num;
-            Vehicle[] vehicle = new Vehicle[4];
+                        //Metod ett
+            Car car = new Car { Model = "Volvo", RegistrationNumber = "ABC123", Owner = new Person { FirstName = "Fredrik", LastName = "Karlsson", Age = 19 } };
+            //Metod två
+            Car car2 = new Car();
+            car2.Model = "Volvo";
+            car2.RegistrationNumber = "ABC123";
 
-            for (int i = 0; i < 4; i++)
-            {
-                num = numberGenerator.Next(1,4);
-                switch (num)
-                {
-                    case 1: vehicle[i] = new Car(); break;
-                    case 2: vehicle[i] = new StarShip(); break;
-                    case 3: vehicle[i] = new Bicycle(); break;
-                    case 4: vehicle[i] = new Car(); break;
-                }
-            }        
-        
-            for (int i = 0; i < 4; i++)
-            {
-                vehicle[i].VehicleColorAndMake();       
-            }
+            car2.Owner = new Person();
+            car2.Owner.FirstName = "Fredrik";
+            car2.Owner.LastName = "Karlsson";
+            car2.Owner.Age = 19;
 
-            Console.ReadKey();
+            Console.Write(car.ToString());
+            Console.Readline();
+                        
         }
     }
 }
